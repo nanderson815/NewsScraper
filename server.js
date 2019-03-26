@@ -21,8 +21,23 @@ mongoose.connect("mongodb://localhost/newsDB", { useNewUrlParser: true });
 
 app.get("/", function(req, res){
     res.render("index");
-})
+});
 
+app.get("/scrape", function(req, res){
+    axios.get("https://www.bbc.com/news/topics/cxqvep8kqext/long-reads").then(function(response){
+        var $ = cheerio.load(response.data);
+
+        $("article").each(function(i, element){
+            var results = {};
+            
+            results.title = $(this).children("header").text();
+            results.img = $(this).children("img").attr("src");
+            results.link = "https://www.bbc.com" + $(this).children("header").children("div").children("h3").children("a").attr("href");
+
+            console.log(results);
+        });
+    });
+});
 
 // Start the server
 app.listen(PORT, function () {
