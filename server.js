@@ -23,7 +23,9 @@ mongoose.connect("mongodb://localhost/newsDB", { useNewUrlParser: true });
 
 
 app.get("/", function(req, res){
-    res.render("index");
+    db.Article.find({}).then(function(dbArticle){
+        res.json(dbArticle);
+    })
 });
 
 app.get("/scrape", function(req, res){
