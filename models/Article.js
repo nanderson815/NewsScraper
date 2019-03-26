@@ -7,7 +7,7 @@ var ArticleShema = new Schema({
         type: String,
         required: true
     },
-    description: {
+    summary: {
         type: String,
         required: true
     },
