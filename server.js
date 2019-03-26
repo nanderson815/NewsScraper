@@ -29,13 +29,14 @@ app.get("/scrape", function(req, res){
 
         $("article").each(function(i, element){
             var results = {};
-            
-            results.title = $(this).children("header").text();
-            results.img = $(this).children("img").attr("src");
-            results.link = "https://www.bbc.com" + $(this).children("header").children("div").children("h3").children("a").attr("href");
 
+            results.title = $(this).children("header").text();
+            results.summary = $(this).find("p").text();
+            results.link = "https://www.bbc.com" + $(this).children("header").children("div").children("h3").children("a").attr("href");
+           
             console.log(results);
         });
+ 
     });
 });
 
