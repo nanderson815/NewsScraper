@@ -5,7 +5,7 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 var exphbs = require("express-handlebars");
 
-// var db = require("./models");
+var db = require("./models");
 
 var PORT = 3000;
 
@@ -34,7 +34,7 @@ app.get("/scrape", function(req, res){
             results.summary = $(this).find("p").text();
             results.link = "https://www.bbc.com" + $(this).children("header").children("div").children("h3").children("a").attr("href");
            
-            console.log(results);
+            db
         });
  
     });
