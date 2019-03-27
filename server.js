@@ -28,13 +28,14 @@ app.get("/", function(req, res){
     })
 });
 
-app.get("/scrape", function(req, res){
+app.get("/api/scrape", function(req, res){
     axios.get("https://www.bbc.com/news/topics/cxqvep8kqext/long-reads").then(function(response){
         var $ = cheerio.load(response.data);
 
         $("article").each(function(i, element){
             var results = {};
 
+            // fix to add bbc url to USA links. USA are relative, UK are absolute. 
             let linktest = $(this).find("div").find('a').attr("href");
             if (linktest.includes("uk")){
                 results.link = linktest;
@@ -44,12 +45,13 @@ app.get("/scrape", function(req, res){
 
             results.title = $(this).children("header").text();
             results.summary = $(this).find("p").text();
-            // results.link = "https://www.bbc.com" + $(this).find("div").find('a').attr("href");
+            
            
+            
             db.Article.create(results).then(function(dbArticle){
                 console.log(dbArticle);
             });
-        });
+        }).then(res.send(200));
  
     });
 });
