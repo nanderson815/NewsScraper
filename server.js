@@ -28,6 +28,15 @@ app.get("/", function(req, res){
     })
 });
 
+app.get("/articles/:id", function(req, res){
+    db.Note.create(req.body).then(function(dbNote){
+        return db.Article.findOneAndUpdate({_id: req.params.id}, {note: dbNote.id}, {new: true})
+        .then(function(dbArticle){
+            res.json(dbArticle);
+        });
+    });
+});
+
 app.get("/api/scrape", function(req, res){
     axios.get("https://www.bbc.com/news/topics/cxqvep8kqext/long-reads").then(function(response){
         var $ = cheerio.load(response.data);
