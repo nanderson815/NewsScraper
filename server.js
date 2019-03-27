@@ -24,7 +24,7 @@ mongoose.connect("mongodb://localhost/newsDB", { useNewUrlParser: true });
 
 app.get("/", function(req, res){
     db.Article.find({}).then(function(dbArticle){
-        res.json(dbArticle);
+        res.render("index", {Articles: dbArticle});
     })
 });
 
@@ -35,9 +35,16 @@ app.get("/scrape", function(req, res){
         $("article").each(function(i, element){
             var results = {};
 
+            let linktest = $(this).find("div").find('a').attr("href");
+            if (linktest.includes("uk")){
+                results.link = linktest;
+            } else {
+                results.link = "https://www.bbc.com" + linktest
+            };
+
             results.title = $(this).children("header").text();
             results.summary = $(this).find("p").text();
-            results.link = "https://www.bbc.com" + $(this).children("header").children("div").children("h3").children("a").attr("href");
+            // results.link = "https://www.bbc.com" + $(this).find("div").find('a').attr("href");
            
             db.Article.create(results).then(function(dbArticle){
                 console.log(dbArticle);

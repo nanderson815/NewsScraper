@@ -1,0 +1,11 @@
+<h1>News Articles - BBC</h1>
+<h3>See rececent articles from BBC below:</h3>
+
+<ul>
+    {{#each Articles}}
+        <div>
+            <a href="{{link}}"><h4>{{title}}</h4></a>
+            <p>{{summary}}</p>
+        </div>
+    {{/each}}
+</ul>
