@@ -51,7 +51,7 @@ app.get("/api/scrape", function(req, res){
             db.Article.create(results).then(function(dbArticle){
                 console.log(dbArticle);
             });
-        }).then(res.send(200));
+        }).then(res.sendStatus(200));
  
     });
 });
