@@ -8,3 +8,13 @@ $("#scrape").click(() => {
     })
 });
 
+$("#comments").click(function(){
+    let id = $(this).data("id");
+    window.location.href = '/articles/' + id
+});
+
+$("#submit").click(function(e){
+    e.preventDefault();
+    console.log("hey");
+})
+

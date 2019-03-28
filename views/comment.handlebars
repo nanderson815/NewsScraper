@@ -2,11 +2,21 @@
     <div class="card">
         <div class="card-content">
             <div class="row">
+                <div class="col s12">
+                    <h3>{{Article.title}}</h3>
+                    <p>{{Article.summary}}</p>
+                </div>
+            </div>
+
+
+
+            <div class="row">
                 <form class="col s12">
 
                     <div class="row">
+                        <h4>Enter Your Comment Below:</h4>
                         <div class="input-field col s12">
-                            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                            <input id="first_name" type="text" class="validate">
                             <label for="first_name">Username</label>
                         </div>
                     </div>
@@ -19,7 +29,9 @@
                             </div>
                         </div>
                     </div>
-
+                    <button class="btn waves-effect waves-light" id="submit" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
                 </form>
             </div>
         </div>
