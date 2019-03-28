@@ -2,34 +2,46 @@
     <div class="card">
         <div class="card-content">
             <div class="row">
+                <button class="btn waves-effect waves-light" id="home">Home</button>
                 <div class="col s12">
-                    <h3>{{Article.title}}</h3>
+                    <h4>{{Article.title}}</h4>
                     <p>{{Article.summary}}</p>
                 </div>
             </div>
+            <div class="divider"></div>
+            <div class="row">
+                <h5>Comments</h5>
+                {{#each Article.comments}}
+                <div class="col s12 box">
+                    <h6>{{user}}</h6>
+                    <p>{{comment}}</p>
+                </div>
+                {{/each}}
+            </div>
 
 
-
+            <div class="divider"></div>
             <div class="row">
                 <form class="col s12">
 
                     <div class="row">
                         <h4>Enter Your Comment Below:</h4>
                         <div class="input-field col s12">
-                            <input id="first_name" type="text" class="validate">
-                            <label for="first_name">Username</label>
+                            <input id="user" type="text" class="validate">
+                            <label for="user">Username</label>
                         </div>
                     </div>
 
+
                     <div class="row">
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Comment</label>
-                            </div>
+                        <div class="input-field col s12">
+                            <textarea id="comment" class="materialize-textarea"></textarea>
+                            <label for="comment">Comment</label>
                         </div>
                     </div>
-                    <button class="btn waves-effect waves-light" id="submit" type="submit" name="action">Submit
+
+                    <button class="btn waves-effect waves-light" data-id="{{Article._id}}" id="submit" type="submit"
+                        name="action">Submit
                         <i class="material-icons right">send</i>
                     </button>
                 </form>

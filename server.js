@@ -41,7 +41,8 @@ app.get("/articles/:id", function (req, res) {
 
 app.post("/articles/:id", function (req, res) {
     db.Comment.create(req.body).then(function (dbComment) {
-        return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbComment.id }, { new: true })
+        return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push:{ comments: dbComment.id }}, { new: true })
+            .populate("comments")
             .then(function (dbArticle) {
                 res.json(dbArticle);
             });
