@@ -19,7 +19,10 @@ app.use(express.static("public"));
 
 
 
-mongoose.connect("mongodb://localhost/newsDB", { useNewUrlParser: true });
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsDB";
+
+mongoose.connect(MONGODB_URI);
+
 
 
 app.get("/", function (req, res) {
